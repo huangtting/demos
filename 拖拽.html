@@ -18,6 +18,8 @@
     <div id="box" style="top:100px;left:100px;">
     </div>
     <script>
+        //startLeft,startTop 记录元素拖动前的的left和top
+        //startMouseX，startMouseY记录元素拖动时鼠标的left和top
         let style={
             startLeft:0,
             startTop:0,
@@ -46,6 +48,7 @@
                if(style.isMove)
                {
                     let box=document.getElementById("box");
+                    //通过计算鼠标的移动距离，加到元素上
                     let disX=ev.clientX-style.startMouseX;
                     let disY=ev.clientY-style.startMouseY;
 
