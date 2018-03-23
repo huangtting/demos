@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟select</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div.select{
+            position: relative;
+            width: 100px;
+            margin:50px auto;
+            text-align: center;
+            border: 1px solid gray;
+        }
+        div.content{
+            line-height: 2em;
+        }
+        ul.dropDown{
+            position: absolute;
+            display: none;
+
+        }
+        ul.dropDown.active{
+            width: 100%;
+            text-align: center;
+            display: block;
+            /*border: 1px solid black;*/
+        }
+        li{
+            list-style-type: none;
+        }
+        li:hover{
+            color:white;
+            background-color:#f6615b;
+        }
+
+    </style>
+</head>
+<body>
+<div class="select">
+    <div class="content">请选择</div>
+    <ul class="dropDown">
+        <li>一</li>
+        <li>二</li>
+    </ul>
+</div>
+
+    <script>
+        function dropDown() {
+            let select=document.getElementsByClassName('select')[0];
+                select.addEventListener('click',function (ev) {
+                    let dropDown=this.getElementsByClassName("dropDown")[0];
+                    if(ev.target.tagName.toLowerCase()==='div')
+                    {
+
+                        if(dropDown.classList.contains('active'))
+                        {
+                            dropDown.classList.remove('active')
+                        }
+                        else
+                        {
+                            dropDown.classList.add('active');
+                        }
+                    }
+                    else
+                    {
+                        let content=document.getElementsByClassName('content')[0];
+                        content.innerHTML=ev.target.innerHTML;
+                        dropDown.classList.remove('active');
+                    }
+               })
+        }
+        window.onload=function () {
+            dropDown();
+        }
+    </script>
+</body>
+</html>

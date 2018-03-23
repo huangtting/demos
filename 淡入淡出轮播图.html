@@ -15,7 +15,7 @@
         }
 
         div.carousel_inner img{
-            /*轮播的图片相对于carousel_outer绝对定位*/
+            /*轮播的图片相对于carousel_outer绝对定位,把所有的图片重叠放在一起*/
             position: absolute;
             top:0;
             left:0;
@@ -114,7 +114,7 @@
             //删除active类
             function slideOff() {
                 imgs[current].classList.remove("active");
-                subscripts[current].classList.remove("active");
+                subscripts[].classList.remove("active");
             }
             // 增加active类
             function slideOn() {
