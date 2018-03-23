@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动轮播图</title>
+    <style>
+        div.carousel_outer{
+            position:relative;
+            overflow: hidden;
+            width:980px;
+            height:500px;
+            border:1px solid black;
+            font-size: 0;
+        }
+        div.carousel_inner{
+            position: absolute;
+            animation:slider 20s infinite;
+            width:500%;
+        }
+        @keyframes slider{
+            0% { left: 0; }
+            20% { left: 0;}
+            25% { left: -100%; }
+            45% { left: -100%; }
+            50% { left: -200%; }
+            70% { left: -200%; }
+            75% { left: -300%; }
+            95% { left: -300%; }
+            100% { left: -400%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel_outer">
+        <div class="carousel_inner">
+            <!--第一张图片和最后一张图片相同，假装回到第一张-->
+            <img src="image/slider/1.jpg">
+            <img src="image/slider/2.jpg">
+            <img src="image/slider/3.jpg">
+            <img src="image/slider/4.jpg">
+            <img src="image/slider/1.jpg">
+        </div>
+    </div>
+</body>
+</html>
