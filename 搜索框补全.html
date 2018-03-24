@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索框补全</title>
+    <style>
+
+        div.wrap{
+            width: 240px;
+            margin: 20px auto 0 auto;
+            font-size: 13px;
+        }
+        .infor{
+            width: 240px;
+            height: 36px;
+            padding-left: 5px;
+            border-radius: 2px;
+            border: 1px solid #dedede;
+            color: #666;
+            outline: none;
+        }
+        .auto{
+            width: 240px;
+            border: 1px solid #dedede;
+            border-top: none;
+            /*padding-left: 5px;*/
+        }
+        .auto_out{
+            width: 238px;
+            height: 36px;
+            line-height: 36px;
+            padding-left: 5px;
+            color: #000;
+            background: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+        }
+        .auto_out.on{
+            background: #eee;
+            cursor: pointer;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <input type="text"  class="infor">
+        <div class="auto hidden" id="auto">
+            <!--<div class="auto_out">1</div>-->
+            <!--<div class="auto_out">2</div>-->
+        </div>
+    </div>
+<script>
+    let imformation=['七里香','b0','b12','b22','b3','b4','b5','b6','如果爱','b7','b8','b2','ab','acd','accd','abd','qq音乐','b1','cd','ccd','cbcv','小王子','cxf','b0'];
+    let onIndex=-1;
+
+    function autoCompelete() {
+        let infor=document.getElementsByClassName('infor')[0];
+        let auto=document.getElementsByClassName('auto')[0];
+
+        infor.addEventListener('input',function (ev) {
+            let input=this.value;
+
+            auto.innerHTML='';
+            if(input.length!==0)
+            {
+                let fragment = document.createDocumentFragment();
+                let reg=new RegExp('('+input+')','i');
+                let index=0;
+                for(let i=0;i<imformation.length;i++)
+                {
+                    if(reg.test(imformation[i]))
+                    {
+                        let div=document.createElement('div');
+                        div.classList.add('auto_out');
+                        div.innerHTML=imformation[i].replace(reg,'<strong>$1</strong>');
+                        div.setAttribute('data-index',index++);
+
+                        fragment.appendChild(div);
+                    }
+                }
+
+                auto.appendChild(fragment);
+                auto.style.display='block';
+
+                auto.addEventListener('click',function (ev) {
+                    infor.value=ev.target.innerHTML;
+                    this.style.display='none';
+                });
+                auto.addEventListener('mouseover',function (ev) {
+                    ev.target.classList.add('on');
+                    onIndex=ev.target.getAttribute('data-index');
+
+                });
+                auto.addEventListener('mouseout',function (ev) {
+                    ev.target.classList.remove('on');
+                    onIndex=-1;
+
+                })
+            }
+            else{
+                auto.style.display='none';
+            }
+
+        });
+
+        infor.addEventListener('keydown',function (ev) {
+            let divs;
+            let len;
+            if(ev.keyCode===38||ev.keyCode===40||ev.keyCode===13)
+            {
+                divs=document.getElementsByClassName('auto_out');
+                len=divs.length;
+            }
+           if(ev.keyCode===38)//上
+           {
+               if(onIndex>=0 && onIndex <len)
+                   divs[onIndex].classList.remove('on');
+
+               if(onIndex<=0) onIndex=len;
+
+               onIndex--;
+               divs[onIndex].classList.add('on');
+
+
+           }
+           else if(ev.keyCode===40)//下
+           {
+
+               if(onIndex>=0 && onIndex <len)
+                    divs[onIndex].classList.remove('on');
+               if(onIndex===len-1) onIndex=-1;
+
+               onIndex++;
+
+               divs[onIndex].classList.add('on');
+
+           }
+           else if(ev.keyCode===13)//回车
+           {
+               let content=divs[onIndex].innerHTML;
+               content=content.replace('<strong>','');
+               content=content.replace('</strong>','');
+
+               infor.value=content;
+               auto.style.display='none';
+               onIndex=-1;
+
+           }
+        })
+    }
+    window.onload=function () {
+        autoCompelete();
+    }
+</script>
+</body>
+</html>
