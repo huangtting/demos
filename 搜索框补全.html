@@ -143,9 +143,7 @@
            else if(ev.keyCode===13)//回车
            {
                let content=divs[onIndex].innerHTML;
-               content=content.replace('<strong>','');
-               content=content.replace('</strong>','');
-
+               content=content.replace(/<strong>|<\/strong>/g,'');
                infor.value=content;
                auto.style.display='none';
                onIndex=-1;
