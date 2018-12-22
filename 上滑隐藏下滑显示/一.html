@@ -45,15 +45,13 @@
   </style>
 </head>
 <body>
-  <span class="nd-animation">
-  </span>
+  <span class="nd-animation"></span>
   <script type="text/javascript">
-    var node = document.getElementsByClassName('nd-animation')[0];
-    window.addEventListener('click', function() {
+    const node = document.getElementsByClassName('nd-animation')[0];
+    window.addEventListener('click', () => {
       if (node.classList.contains('is-open')) {
         node.classList.remove('is-open');
-      }
-      else {
+      } else {
         node.classList.add('is-open');
       }
     }, false);

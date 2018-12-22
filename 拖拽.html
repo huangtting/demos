@@ -1,66 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>拖拽</title>
-    <style>
-        #box{
-            width:100px;
-            height:100px;
-            background-color: #a0b3d6;
-            position: absolute;
-            /*top:100px;*/
-            /*left:100px;*/
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>拖拽</title>
+  <style>
+    #box{
+      width:100px;
+      height:100px;
+      background-color: #a0b3d6;
+      position: absolute;
+      /*top:100px;*/
+      /*left:100px;*/
+    }
+  </style>
 </head>
 <body>
-    <div id="box" style="top:100px;left:100px;">
-    </div>
-    <script>
-        //startLeft,startTop 记录元素拖动前的的left和top
-        //startMouseX，startMouseY记录元素拖动时鼠标的left和top
-        let style={
-            startLeft:0,
-            startTop:0,
-            startMouseX:0,
-            startMouseY:0,
-            isMove:false
-        };
-        function startDrag() {
-            let box=document.getElementById("box");
-            box.addEventListener('mousedown',function (ev) {
+  <div id="box" style="top:100px;left:100px;"></div>
+  <script>
+    // startLeft,startTop 记录元素拖动前的的left和top
+    // startMouseX，startMouseY记录元素拖动时鼠标的left和top
+    const style = {
+      startLeft: 0,
+      startTop: 0,
+      startMouseX: 0,
+      startMouseY: 0,
+      isMove: false,
+    };
+    const box = document.getElementById('box');
+    function startDrag() {
+      box.addEventListener('mousedown', function mousedownController(ev) {
+        style.isMove = true;
+        style.startMouseX = ev.clientX;
+        style.startMouseY = ev.clientY;
 
-                style.isMove=true;
-                style.startMouseX=ev.clientX;
-                style.startMouseY=ev.clientY;
+        style.startTop = this.style.top;
+        style.startLeft = this.style.left;
+      });
+      box.addEventListener('mouseup', () => {
+        style.isMove = false;
+      });
+      document.addEventListener('mousemove', (ev) => {
+        if (style.isMove) {
+          // const box = document.getElementById('box');
+          // 通过计算鼠标的移动距离，加到元素上
+          const disX = ev.clientX - style.startMouseX;
+          const disY = ev.clientY - style.startMouseY;
 
-                style.startTop=this.style.top;
-                style.startLeft=this.style.left;
-
-            });
-            box.addEventListener('mouseup',function () {
-                style.isMove=false;
-
-            });
-            document.addEventListener('mousemove',function (ev) {
-
-               if(style.isMove)
-               {
-                    let box=document.getElementById("box");
-                    //通过计算鼠标的移动距离，加到元素上
-                    let disX=ev.clientX-style.startMouseX;
-                    let disY=ev.clientY-style.startMouseY;
-
-                    box.style.top=parseInt(style.startTop)+disY+'px';
-                    box.style.left=parseInt(style.startLeft)+disX+'px';
-               }
-            })
+          box.style.top = `${parseInt(style.startTop, 10) + disY}px`;
+          box.style.left = `${parseInt(style.startLeft, 10) + disX}px`;
         }
+      });
+    }
 
-        window.onload=function () {
-            startDrag();
-        }
+    window.onload = function dragController() {
+      startDrag();
+    };
     </script>
 </body>
 </html>

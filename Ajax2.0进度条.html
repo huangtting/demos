@@ -23,31 +23,30 @@
 </div>
 </body>
 <script>
-    window.onload=function () {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'image/slider/1.jpg');
-        // 上传完成后的回调函数
-        xhr.loaded = function(ev) {
-            if (xhr.status === 200) {
-                console.log('上传成功');
-                console.log(xhr.responseText);
-            } else {
-                console.log('上传出错');
-            }
-        };
-        // 获取上传进度,需要服务器支持..
-        xhr.upload.onprogress = function(event) {
-            console.log(event.loaded);
-            console.log(event.total);
-            if (event.lengthComputable) {
-                var percent = Math.floor(event.loaded / event.total * 100);
-                document.querySelector("#progress #progress-item").style.width = percent + "%";
-                // 设置进度显示
-                console.log(percent)
-            }
-        };
-        xhr.send();
-    }
-
+    window.onload = function load() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'image/slider/1.jpg');
+      // 上传完成后的回调函数
+      xhr.loaded = function loaded() {
+        if (xhr.status === 200) {
+          console.log('上传成功');
+          console.log(xhr.responseText);
+        } else {
+          console.log('上传出错');
+        }
+      };
+      // 获取上传进度,需要服务器支持..
+      xhr.upload.onprogress = function (event) {
+        console.log(event.loaded);
+        console.log(event.total);
+        if (event.lengthComputable) {
+          const percent = Math.floor(event.loaded / event.total * 100);
+          document.querySelector('#progress #progress-item').style.width = `${percent}%`;
+          // 设置进度显示
+          console.log(percent);
+        }
+      };
+      xhr.send();
+    };
 </script>
 </html>

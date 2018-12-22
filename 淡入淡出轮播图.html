@@ -1,185 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>淡入淡出轮播图</title>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet">
-    <style>
-        div.carousel_outer
-        {
-            position: relative;
-            text-align: center;
-            width:980px;
-            height: 500px;
-            margin:80px auto 0 auto;
-        }
+  <meta charset="UTF-8">
+  <title>淡入淡出轮播图</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet">
+  <style>
+    div.carousel_outer
+    {
+      position: relative;
+      text-align: center;
+      width:980px;
+      height: 500px;
+      margin:80px auto 0 auto;
+    }
 
-        div.carousel_inner img{
-            /*轮播的图片相对于carousel_outer绝对定位,把所有的图片重叠放在一起*/
-            position: absolute;
-            top:0;
-            left:0;
-            opacity: 0;
-            transition :opacity 1s;
-
-        }
-        div.carousel_inner img.active
-        {
-            /*通过改变轮播图片的透明度实现轮播，通过增加删除类active*/
-            opacity: 1;
-        }
-        div.subscripte{
-            /*下标也相对于carousel_outer绝对定位*/
-            position: absolute;
-            bottom:20px;
-            right:50%;
-            transform: translate(50%,0);
-        }
-        div.carousel_outer span
-        {
-            width:25px;height:25px;
-            line-height: 25px;
-            display: inline-block;
-            border: 1px solid white;
-            border-radius: 25px;
-            color: black;
-            background-color:white;
-            transition: all 1s;
-        }
-        div.carousel_outer span.active
-        {
-            /*同样通过增加删除active类来实现下标的变化*/
-            color:white;
-            background-color: rgb(236,97,73);
-            border: 1px solid rgb(236,97,73);
-        }
-        .lefticon,.righticon
-        {
-            /*左右icon也相对于carousel_outer绝对定位*/
-            color: white;
-            position: absolute;
-            z-index: 1;
-            background-color: rgba(0,0,0,0.5);
-            padding: 25px 20px;
-            border-radius: 10px;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .lefticon{
-            top:50%;
-            left:0;
-            transform: translate(0,-50%);
-        }
-        .righticon{
-            top:50%;
-            right:0;
-            transform: translate(0,-50%);
-        }
-        .lefticon.active,.righticon.active{
-            /*同样通过增加删除active类来实现左右icon的变化*/
-            opacity: 1;
-        }
-    </style>
+    div.carousel_inner img{
+      /*轮播的图片相对于carousel_outer绝对定位,把所有的图片重叠放在一起*/
+      position: absolute;
+      top:0;
+      left:0;
+      opacity: 0;
+      transition :opacity 1s;
+    }
+    div.carousel_inner img.active
+    {
+      /*通过改变轮播图片的透明度实现轮播，通过增加删除类active*/
+      opacity: 1;
+    }
+    div.subscripte{
+      /*下标也相对于carousel_outer绝对定位*/
+      position: absolute;
+      bottom:20px;
+      right:50%;
+      transform: translate(50%,0);
+    }
+    div.carousel_outer span
+    {
+      width:25px;height:25px;
+      line-height: 25px;
+      display: inline-block;
+      border: 1px solid white;
+      border-radius: 25px;
+      color: black;
+      background-color:white;
+      transition: all 1s;
+    }
+    div.carousel_outer span.active
+    {
+      /*同样通过增加删除active类来实现下标的变化*/
+      color:white;
+      background-color: rgb(236,97,73);
+      border: 1px solid rgb(236,97,73);
+    }
+    .lefticon,.righticon
+    {
+      /*左右icon也相对于carousel_outer绝对定位*/
+      color: white;
+      position: absolute;
+      z-index: 1;
+      background-color: rgba(0,0,0,0.5);
+      padding: 25px 20px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .lefticon{
+      top:50%;
+      left:0;
+      transform: translate(0,-50%);
+    }
+    .righticon{
+      top:50%;
+      right:0;
+      transform: translate(0,-50%);
+    }
+    .lefticon.active,.righticon.active{
+      /*同样通过增加删除active类来实现左右icon的变化*/
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
 <div class="carousel_outer">
-    <i class="fa fa-chevron-left lefticon " aria-hidden="true"></i>
-    <div class="carousel_inner">
-        <img src="image/slider/1.jpg" class="active">
-        <img src="image/slider/2.jpg">
-        <img src="image/slider/3.jpg">
-        <img src="image/slider/4.jpg">
-    </div>
-    <i class="fa fa-chevron-right righticon" aria-hidden="true"></i>
-    <div class="subscripte">
-        <span class="active">1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-    </div>
-
+  <i class="fa fa-chevron-left lefticon " aria-hidden="true"></i>
+  <div class="carousel_inner">
+    <img src="image/slider/1.jpg" class="active">
+    <img src="image/slider/2.jpg">
+    <img src="image/slider/3.jpg">
+    <img src="image/slider/4.jpg">
+  </div>
+  <i class="fa fa-chevron-right righticon" aria-hidden="true"></i>
+  <div class="subscripte">
+    <span class="active">1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+  </div>
 </div>
-    <script>
-        function slideShow() {
-            let carousel_outer=document.getElementsByClassName("carousel_outer")[0];
-            let carousel_inner=document.getElementsByClassName("carousel_inner")[0];
-            let imgs=carousel_inner.getElementsByTagName("img");
-            let subscripts=document.getElementsByClassName("carousel_outer")[0].getElementsByTagName("span");
-            let lefticon=document.getElementsByClassName("lefticon")[0];
-            let righticon=document.getElementsByClassName("righticon")[0];
-            //current代表当前图像的下标
-            let current=0;
-            //intervalId来记录setInterval的返回值，用于消除动画效果
-            let intervalId;
-            //删除active类
-            function slideOff() {
-                imgs[current].classList.remove("active");
-                subscripts[current].classList.remove("active");
-            }
-            // 增加active类
-            function slideOn() {
-                imgs[current].classList.add("active");
-                subscripts[current].classList.add("active");
-            }
+<script>
+  function slideShow() {
+    const carouselOuter = document.getElementsByClassName('carousel_outer')[0];
+    const carouselInner = document.getElementsByClassName('carousel_inner')[0];
+    const imgs = carouselInner.getElementsByTagName('img');
+    const subscripts = document.getElementsByClassName('carousel_outer')[0].getElementsByTagName('span');
+    const lefticon = document.getElementsByClassName('lefticon')[0];
+    const righticon = document.getElementsByClassName('righticon')[0];
+    // current代表当前图像的下标
+    let current = 0;
+    // intervalId来记录setInterval的返回值，用于消除动画效果
+    let intervalId;
+    // 删除active类
+    function slideOff() {
+      imgs[current].classList.remove('active');
+      subscripts[current].classList.remove('active');
+    }
+    // 增加active类
+    function slideOn() {
+      imgs[current].classList.add('active');
+      subscripts[current].classList.add('active');
+    }
 
-            function changeSlide() {
-                slideOff();
-                current++;
-                if(current>3) current=0;
-                slideOn();
-            }
-            //使用setInterval调用changeSlide
-            intervalId= setInterval(changeSlide,4000);
-            //onmouseover停止轮播
-            carousel_outer.onmouseover=function () {
-
-                clearInterval(intervalId);
-                if(!righticon.classList.contains("active"))
-                {
-                    righticon.classList.add("active");
-                }
-                if(!lefticon.classList.toggle("active"))
-                {
-                    lefticon.classList.add("active")
-                }
-            };
-            //onmouseout重新开始轮播
-            carousel_outer.onmouseout=function () {
-                intervalId=setInterval(changeSlide,4000);
-                righticon.classList.remove("active");
-                lefticon.classList.remove("active");
-            };
-            //下标的onmouseover事件，停止轮播，重新设置current
-            for(let i=0;i<subscripts.length;i++)
-            {
-                subscripts[i].onmouseover=function () {
-                    clearInterval(intervalId);
-                    slideOff();
-                    current=this.innerHTML-1;
-                    slideOn();
-                };
-            }
-            //左右标签的onclick事件，先停止轮播，再更改current
-            lefticon.onclick=function (e) {
-                e.preventDefault();
-                clearInterval(intervalId);
-                slideOff();
-                current--;
-                current=current<0?3:current;
-                slideOn();
-            };
-            righticon.onclick=function (e) {
-                e.preventDefault();
-                clearInterval(intervalId);
-                slideOff();
-                current++;
-                current=current>3?0:current;
-                slideOn();
-            }
-        }
-        window.onload=function () {
-            slideShow();
-        }
-    </script>
+    function changeSlide() {
+      slideOff();
+      current++;
+      if (current > 3) current = 0;
+      slideOn();
+    }
+    // 使用setInterval调用changeSlide
+    intervalId = setInterval(changeSlide, 4000);
+    // onmouseover停止轮播
+    carouselOuter.onmouseover = function mouseoverController() {
+      clearInterval(intervalId);
+      if (!righticon.classList.contains('active')) {
+        righticon.classList.add('active');
+      }
+      if (!lefticon.classList.toggle('active')) {
+        lefticon.classList.add('active');
+      }
+    };
+    // onmouseout重新开始轮播
+    carouselOuter.onmouseout = function mouseoutController() {
+      intervalId = setInterval(changeSlide, 4000);
+      righticon.classList.remove('active');
+      lefticon.classList.remove('active');
+    };
+    function slideController() {
+      clearInterval(intervalId);
+      slideOff();
+      current = this.innerHTML - 1;
+      slideOn();
+    }
+    // 下标的onmouseover事件，停止轮播，重新设置current
+    for (let i = 0; i < subscripts.length; i++) {
+      subscripts[i].onmouseover = slideController;
+    }
+    // 左右标签的onclick事件，先停止轮播，再更改current
+    lefticon.onclick = function (e) {
+      e.preventDefault();
+      clearInterval(intervalId);
+      slideOff();
+      current--;
+      current = current < 0 ? 3 : current;
+      slideOn();
+    };
+    righticon.onclick = function (e) {
+      e.preventDefault();
+      clearInterval(intervalId);
+      slideOff();
+      current++;
+      current = current > 3 ? 0 : current;
+      slideOn();
+    };
+  }
+  window.onload = function () {
+    slideShow();
+  };
+</script>
 </body>
 </html>

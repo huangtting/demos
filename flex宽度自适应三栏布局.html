@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>flex宽度自适应布局</title>
-    <style>
-        *{margin:0;padding:0;}
-
-        #container{
-            width:100%;
-            display:flex;
-            justify-content:space-between;
-        }
-        .main-left{
-            width:200px;
-            height:800px;
-            background:#ffe6b8;
-        }
-        .main-center{
-            height:800px;
-            margin:0 10px;
-            background:#a0b3d6;
-            flex:1;
-        }
-        .main-right{
-            width:300px;
-            height:800px;
-            background:#ffe6b8;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <title>flex宽度自适应布局</title>
+  <style>
+    *{margin:0;padding:0;}
+    #container{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+    }
+    .main-left{
+        width:200px;
+        height:800px;
+        background:#ffe6b8;
+    }
+    .main-center{
+        height:800px;
+        margin:0 10px;
+        background:#a0b3d6;
+        flex:1;
+    }
+    .main-right{
+        width:300px;
+        height:800px;
+        background:#ffe6b8;
+    }
+  </style>
 </head>
 <body>
 <div id="container">
     <div class="main-left"></div>
     <div class="main-center"></div>
     <div class="main-right"></div>
-
 </div>
 </body>
 </html>

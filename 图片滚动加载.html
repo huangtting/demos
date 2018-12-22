@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>动态图片加载</title>
-    <style>
-        body {text-align: center;}
-        .list {margin-bottom: 40px;}
-    </style>
+  <meta charset="utf-8" />
+  <title>动态图片加载</title>
+  <style>
+    body {text-align: center;}
+    .list {margin-bottom: 40px;}
+  </style>
 </head>
 <body>
 <h1>图片滚动加载</h1>
-<div id="content">
-</div>
+<div id="content"></div>
 <script type="text/javascript">
-    // 方法是用自定义属性xSrc保存图像的URL，在网页滚动时对网页中所有图像(image元素)进行判断，
-    // 看看它们的上边沿或下边沿是否出现在浏览器客户区，
-    // 如果是，则把data-src的值拷贝到属性src中（用getAttribute 和setAttribute方法），
-    // 此时浏览器才去下载并显示图像。
-    var allImgs = "";
-    var imgPath="./image/other/";
-    for (var i = 1; i < 20; i ++) {
-        allImgs += '<div  class="list"><img data-src="'+imgPath+ i + '.jpg"';
-        allImgs += ' src="" width="200" height="250" ';
-        allImgs += ' style="background:url('+imgPath+'wait.gif) no-repeat center;" /><br />图片' + i + '</div>';
-    }
-    
-    document.getElementById("content").innerHTML = allImgs;
-  
-    function showImages() {
-        
-        let imgs =Array.from(document.images);
-        imgs.forEach(function (img,index,array) {
-            if(img.getBoundingClientRect().top>0&&img.getBoundingClientRect().top<document.documentElement.clientHeight
-                ||img.getBoundingClientRect().bottom>0 && img.getBoundingClientRect().bottom<document.documentElement.clientHeight
-            )
-            {
-                let src=img.getAttribute("data-src");
-                img.setAttribute("src",src);
+  // 方法是用自定义属性xSrc保存图像的URL，在网页滚动时对网页中所有图像(image元素)进行判断，
+  // 看看它们的上边沿或下边沿是否出现在浏览器客户区，
+  // 如果是，则把data-src的值拷贝到属性src中（用getAttribute 和setAttribute方法），
+  // 此时浏览器才去下载并显示图像。
+  let allImgs = '';
+  const imgPath = './image/other/';
+  for (let i = 1; i < 20; i++) {
+    allImgs += `<div  class="list"><img data-src="${imgPath}${i}.jpg"`;
+    allImgs += ' src="" width="200" height="250" ';
+    allImgs += ` style="background:url(${imgPath}wait.gif) no-repeat center;" /><br />图片${i}</div>`;
+  }
 
-            }
-        });
+  document.getElementById('content').innerHTML = allImgs;
 
-    }
-    window.onscroll = function() {
-        showImages();
-    };
-    
+  function showImages() {
+    const imgs = Array.from(document.images);
+    imgs.forEach((img) => {
+      if (
+        (
+          img.getBoundingClientRect().top > 0
+          && img.getBoundingClientRect().top < document.documentElement.clientHeight
+        )
+        || (
+          img.getBoundingClientRect().bottom > 0
+          && img.getBoundingClientRect().bottom < document.documentElement.clientHeight
+        )
+      ) {
+        const src = img.getAttribute('data-src');
+        img.setAttribute('src', src);
+      }
+    });
+  }
+  window.onscroll = function scroll() {
+    showImages();
+  };
 </script>
 </body>
 </html>
